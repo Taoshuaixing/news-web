@@ -1,0 +1,42 @@
+<nz-card>
+  <div nz-row nzGutter="16">
+    <div nz-col nzSpan="12">
+      修改用户头像
+      <div class="clearfix">
+        <nz-upload
+          class="upload-list-inline"
+          [nzDownload]=""
+          [nzAction]="glaction()"
+          nzListType="picture"
+          [(nzFileList)]="fileList"
+          [nzBeforeUpload]="beforeUpload"
+          (nzChange)="handleChange($event)"
+        >
+          <button nz-button>
+            <span>
+              <i nz-icon nzType="upload"></i>
+              Upload
+            </span>
+          </button>
+        </nz-upload>
+      </div>
+      <!--    <nz-upload class="avatar-uploader" nzAction="" nzName="avatar" nzListType="picture-card" [nzBeforeUpload]="beforeUpload" [nzHeaders]="headers" [nzAction]="glaction()" [nzShowUploadList]="false" [(nzFileList)]="fileList" (nzChange)="handleChange($event)">
+                <ng-container *ngIf="!avatarUrl">
+                    <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
+                    <div class="ant-upload-text">Upload</div>
+                </ng-container>
+                <img *ngIf="fileList[0]" [src]="fileList[fileList.length - 1].thumbUrl" style="width: 100%" />
+            </nz-upload> -->
+      <button *ngIf="fileList.length != 0" (click)="uploadImage()" nz-button nzType="primary">确认修改</button>
+    </div>
+    <div nz-col nzSpan="12">
+      修改用户信息
+      <h1 class="username-block">{{ userProfile.username }}<i nz-icon nzType="form" nzTheme="outline" (click)="showModal()"></i></h1>
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="修改用户信息" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <ng-container *nzModalContent>
+          <input nz-input [(ngModel)]="userProfile.username" />
+        </ng-container>
+      </nz-modal>
+    </div>
+  </div>
+</nz-card>

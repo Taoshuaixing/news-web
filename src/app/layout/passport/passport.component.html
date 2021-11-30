@@ -1,0 +1,20 @@
+<div class="container">
+  <header-i18n showLangText="false" class="langs"></header-i18n>
+  <div class="wrap">
+    <div class="top">
+      <div class="head">
+        <img class="logo" src="./assets/logo-color.svg" />
+        <span class="title">用户登录</span>
+      </div>
+      <div class="desc">河北大学新闻传播学院新闻舆论研判平台用户登录</div>
+    </div>
+    <div class="passport-content">
+      <router-outlet></router-outlet>
+    </div>
+    <global-footer [links]="links">
+      <!-- Copyright
+            <i class="anticon anticon-copyright"></i> 2021
+            <a href="//github.com/cipchk" target="_blank">卡色</a>出品 -->
+    </global-footer>
+  </div>
+</div>

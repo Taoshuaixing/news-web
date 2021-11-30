@@ -1,0 +1,174 @@
+<nz-card>
+  <div nz-row [nzGutter]="[16, 14]">
+    <div nz-col nzSpan="20">
+      <input nz-input [(ngModel)]="tagValue" nzSize="large" placeholder="请输入关键词，多个词用空格隔开" (keyup)="jianTingKey($event)" />
+    </div>
+    <div nz-col nzSpan="4">
+      <button nz-button nzSize="large" nzType="primary" (click)="searchKeyWords()">开始搜索</button>
+    </div>
+    <div nz-col nzSpan="24">
+      <nz-space>
+        <nz-radio-group *nzSpaceItem [(ngModel)]="biaoTiRadio">
+          <label nz-radio nzValue="标题">标题</label>
+          <label nz-radio nzValue="全文">全文</label>
+          <label nz-radio nzValue="文号">文号</label>
+        </nz-radio-group>
+        <div *nzSpaceItem>|</div>
+        <div *nzSpaceItem></div>
+        <nz-radio-group *nzSpaceItem [(ngModel)]="piPeiRadio" (ngModelChange)="setDataType($event)">
+          <label nz-radio nzValue="模糊搜索">模糊搜索</label>
+          <label nz-radio nzValue="精准搜索">精准搜索</label>
+        </nz-radio-group>
+      </nz-space>
+    </div>
+    <div nz-col nzSpan="24">
+      <div nz-row [nzGutter]="[16, 24]">
+        <div nz-col nzSpan="14" *ngIf="flag">
+          <nz-radio-group [(ngModel)]="radioValue" nzName="radiogroup" (ngModelChange)="judgeDate(radioValue)">
+            <label [ngClass]="{ 'animate__animated animate__rubberBand': radioValue === '三天' }" nz-radio nzValue="三天">三天</label>
+            <label [ngClass]="{ 'animate__animated animate__rubberBand': radioValue === '一周' }" nz-radio nzValue="一周">一周</label>
+            <label [ngClass]="{ 'animate__animated animate__rubberBand': radioValue === '一个月' }" nz-radio nzValue="一个月">一个月</label>
+            <label [ngClass]="{ 'animate__animated animate__rubberBand': radioValue === '三个月' }" nz-radio nzValue="三个月">三个月</label>
+            <label [ngClass]="{ 'animate__animated animate__rubberBand': radioValue === '半年' }" nz-radio nzValue="半年">半年</label>
+            <label [ngClass]="{ 'animate__animated animate__rubberBand': radioValue === '自定义' }" nz-radio nzValue="自定义">自定义</label>
+          </nz-radio-group>
+        </div>
+
+        <div nz-col nzSpan="14" *ngIf="!flag" class="animate__animated animate__bounceInRight">
+          <nz-range-picker [nzRanges]="ranges1" ngModel nzFormat="yyyy/MM/dd HH:mm:ss" (ngModelChange)="onChange($event)">
+          </nz-range-picker>
+        </div>
+        <div nz-col nzSpan="4" *ngIf="!flag" class="animate__animated animate__bounceInRight">
+          <a (click)="rollBackChange()"
+            ><i style="font-size: 20px; margin-top: 5px" nz-icon nzType="rollback" nzTheme="outline" title="rollback"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+    <div nz-col nzSpan="24">
+      <div nz-row [nzGutter]="[16, 24]" class="statute-count">
+        <div nz-col nzSpan="5">
+          <span
+            >共命中<b>{{ this.sumCount }}</b
+            >条数据</span
+          >
+        </div>
+        <div nz-col nzSpan="19">
+          <nz-space>
+            <span *nzSpaceItem>
+              <button nz-button nzType="default" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" [nzPlacement]="'bottomLeft'">
+                {{ abstractText }}
+                <i nz-icon nzType="down"></i>
+              </button>
+              <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu>
+                  <li nz-menu-item (click)="showAbstract('显示摘要')">显示摘要</li>
+                  <li nz-menu-item (click)="showAbstract('隐藏摘要')">隐藏摘要</li>
+                </ul>
+              </nz-dropdown-menu>
+            </span>
+
+            <span *nzSpaceItem>
+              <button nz-button nzType="default" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menuLast" [nzPlacement]="'bottomLeft'">
+                {{ browseText }}
+                <i nz-icon nzType="down"></i>
+              </button>
+              <nz-dropdown-menu #menuLast="nzDropdownMenu">
+                <ul nz-menu>
+                  <li nz-menu-item (click)="tableBrowse('列表浏览')">列表浏览</li>
+                  <li nz-menu-item (click)="tableBrowse('分组浏览')">分组浏览</li>
+                </ul>
+              </nz-dropdown-menu>
+            </span>
+
+            <span *nzSpaceItem>
+              <button nz-button nzType="default" (click)="emitSortType()" [nz-tooltip]="!sortType ? '升序' : '降序'">
+                时间排序
+                <i
+                  nz-icon
+                  nzType="caret-down"
+                  nzTheme="outline"
+                  *ngIf="sortType"
+                  [ngClass]="{ 'animate__animated animate__heartBeat': sortType }"
+                ></i>
+                <i
+                  nz-icon
+                  nzType="caret-up"
+                  nzTheme="outline"
+                  *ngIf="!sortType"
+                  [ngClass]="{ 'animate__animated animate__heartBeat': !sortType }"
+                ></i>
+              </button>
+            </span>
+
+            <span *nzSpaceItem>
+              <a nz-tooltip="列表模式" (click)="tableBrowse('列表浏览')" class="icon-font-size"
+                ><i nz-icon nzType="ordered-list" nzTheme="outline"></i
+              ></a>
+            </span>
+            <span *nzSpaceItem>
+              <a nz-tooltip="可视化" (click)="tableBrowse('可视化')" class="icon-font-size"
+                ><i nz-icon nzType="pie-chart" nzTheme="outline"></i
+              ></a>
+            </span>
+          </nz-space>
+        </div>
+      </div>
+    </div>
+    <div nz-col nzSpan="24" *ngIf="keywords.length !== 0 || channel_class.length !== 0">
+      <div nz-row [nzGutter]="[16, 24]">
+        <div nz-col nzSpan="12" *ngIf="keywords.length !== 0" class="animate__animated animate__fadeInDown">
+          <div nz-row [nzGutter]="[16, 24]">
+            <div nz-col nzSpan="7">
+              <nz-badge [nzStyle]="{ backgroundColor: '#1890ff' }" [nzCount]="keywords.length">
+                <button
+                  nz-button
+                  nzType="default"
+                  nz-tooltip
+                  nzTooltipTitle="一键清除"
+                  (click)="delSearch('g')"
+                  style="letter-spacing: 4.5px"
+                >
+                  关键词
+                </button>
+              </nz-badge>
+            </div>
+            <div nz-col nzSpan="17">
+              <nz-tag
+                style="margin-top: 5px"
+                [nzColor]="'blue'"
+                *ngFor="let tag of keywords; let i = index"
+                [nzMode]="'closeable'"
+                (nzOnClose)="handleClose(tag)"
+              >
+                {{ sliceTagName(tag) }}
+              </nz-tag>
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12" *ngIf="channel_class.length !== 0" class="animate__animated animate__fadeInDown">
+          <div nz-row [nzGutter]="[16, 24]">
+            <div nz-col nzSpan="5">
+              <nz-badge [nzStyle]="{ backgroundColor: '#fa8c16' }" [nzCount]="channel_class.length">
+                <button nz-button nzType="default" nz-tooltip nzTooltipTitle="一键清除" (click)="delSearch('clerarChannel_class')">
+                  类别
+                </button>
+              </nz-badge>
+            </div>
+            <div nz-col nzSpan="19">
+              <nz-tag
+                style="margin-top: 5px"
+                [nzColor]="'orange'"
+                *ngFor="let tag of channel_class"
+                [nzMode]="'closeable'"
+                (nzOnClose)="channel_classClose(tag)"
+              >
+                {{ tag }}
+              </nz-tag>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nz-card>

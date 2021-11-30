@@ -1,0 +1,48 @@
+<nz-card>
+  <div nz-row>
+    <div nz-col nzSpan="24">
+      <button nz-button nzType="primary" (click)="createModal({})">新建主题</button>
+      <nz-tree *ngIf="nodes" nzBlockNode [nzData]="nodes" [nzTreeTemplate]="nzTreeTemplate" (nzClick)="onSelectTopic($event)"></nz-tree>
+      <ng-template #nzTreeTemplate let-node let-origin="origin">
+        <span class="custom-node">
+          <span *ngIf="node.title === '主题检索'">
+            <span class="folder-name-zhuti">{{ node.title }}</span>
+            <i style="padding-left: 56px" nz-icon nzType="plus-circle" nzTheme="twotone" (click)="createModal(node)"></i>
+          </span>
+          <span *ngIf="node.title !== '主题检索'">
+            <div nz-row>
+              <div nz-col nzSpan="12">
+                <span class="folder-name">{{ node.title }}</span>
+              </div>
+              <div nz-col nzSpan="12">
+                <nz-space style="padding-left: 20px">
+                  <i nz-icon nzType="plus-circle"
+                     *ngIf = "!origin.parent"
+                     nzTheme="twotone" (click)="createModal(node)">
+                  </i> &nbsp;
+                  <i  nz-icon nzType="edit" nzTheme="twotone" (click)="updateModal(node)" ></i> &nbsp;
+                  <i  nz-icon nzType="delete"
+                      nz-popconfirm
+                      nzPopconfirmTitle="是否删除该主题?"
+                      nzPopconfirmPlacement="bottom"
+                      (nzOnConfirm)="confirm(node)"
+                      (nzOnCancel)="cancel()"
+                      nzTheme="twotone" [nzTwotoneColor]="'#eb2f96'"></i>
+                </nz-space>
+              </div>
+            </div>
+          </span>
+        </span>
+      </ng-template>
+    </div>
+  </div>
+</nz-card>
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <div nz-row [nzGutter]="[10, 18]">
+      <div nz-col nzSpan="24">
+        <input nz-input placeholder="请输入主题事件" [(ngModel)]="updateBody.name" nzSize="large" (keyup.enter)="handleOk()" />
+      </div>
+    </div>
+  </ng-container>
+</nz-modal>

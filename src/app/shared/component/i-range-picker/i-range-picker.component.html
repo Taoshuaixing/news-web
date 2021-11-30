@@ -1,0 +1,15 @@
+<!--<nz-range-picker [nzSize]="size"-->
+<!--                 class="i-range-picker"-->
+<!--                 style="width: 400px;"-->
+<!--                 nzShowTime-->
+<!--                 (ngModelChange)="onFromDataChange($event)"-->
+<!--                 nzFormat="yyyy-MM-dd HH:mm:ss"-->
+<!--                 [(ngModel)]="rangDate"-->
+<!--&gt;</nz-range-picker-->
+<!--&gt;&nbsp;-->
+<!--<button [nzSize]="size"-->
+<!--        *ngFor="let range of rangeList" [nzType]="range.active ? 'primary' : ''" (click)="setRange(range)" nz-button class="i-btn">-->
+<!--  {{ range.name }}-->
+<!--</button>-->
+
+<nz-range-picker [nzRanges]="ranges1" ngModel nzFormat="yyyy/MM/dd HH:mm:ss" (ngModelChange)="onFromDataChange($event)"> </nz-range-picker>

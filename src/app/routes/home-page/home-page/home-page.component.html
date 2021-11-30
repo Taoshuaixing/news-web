@@ -1,0 +1,104 @@
+<div class="home-pages-content">
+  <div nz-row nzJustify="space-between" nzAlign="middle" [nzGutter]="[16]">
+    <div nz-col nzSpan="6">
+      <div nz-row>
+        <div nz-col nzSpan="24">
+          <nz-card [nzBordered]="false" class="animate__animated animate__bounceInLeft">
+            <div style="height: 466px; overflow: hidden">
+              <div class="home-content-card-title">
+                <div></div>
+                <span>今日数据</span>
+              </div>
+              <nz-divider></nz-divider>
+              <div class="home-content-card-newSum">{{ newSum }}</div>
+              <div nz-row class="text-align-center">
+                <div nz-col nzSpan="8">
+                  <nz-progress [nzPercent]="75" nzType="circle" [nzWidth]="80"></nz-progress>
+                </div>
+                <div nz-col nzSpan="8">
+                  <nz-progress [nzPercent]="90" nzType="circle" [nzWidth]="80"></nz-progress>
+                </div>
+                <div nz-col nzSpan="8">
+                  <nz-progress [nzPercent]="100" nzType="circle" [nzWidth]="80"></nz-progress>
+                </div>
+              </div>
+              <div echarts [options]="ZFOptions" style="height: 230px"></div>
+            </div>
+          </nz-card>
+        </div>
+        <div nz-col nzSpan="24">
+          <nz-card [nzBordered]="false" class="animate__animated animate__bounceInLeft">
+            <div echarts [options]="MTOptions" style="height: 200px"></div>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+    <div nz-col nzSpan="12">
+      <div nz-row>
+        <div nz-col nzSpan="24">
+          <nz-card [nzBordered]="false" class="text-align-center animate__animated animate__bounceInDown">
+            <div id="main" style="height: 466px"></div>
+          </nz-card>
+        </div>
+        <div nz-col nzSpan="24">
+          <nz-card [nzBordered]="false" class="animate__animated animate__bounceInUp">
+            <div echarts [options]="ZMOptions" style="height: 200px"></div>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+    <div nz-col nzSpan="6">
+      <div nz-row>
+        <div nz-col nzSpan="24">
+          <nz-card [nzBordered]="false" class="animate__animated animate__bounceInRight">
+            <div style="height: 730px; overflow: hidden">
+              <div class="home-content-card-title">
+                <div></div>
+                <span>实时热点</span>
+              </div>
+              <nz-divider></nz-divider>
+              <nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+                <table style="color: white">
+                  <thead>
+                    <tr style="font-size: 18px; color: #1890ff">
+                      <th width="150">事件</th>
+                      <th width="130">时间</th>
+                      <th width="40">热度</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let da of this.data">
+                      <td>
+                        <a
+                          style="font-size: 16px; color: #ffffff"
+                          target="_blank"
+                          [routerLink]="['/articleDetails']"
+                          [queryParams]="{ id: da.id, pageName: pageName }"
+                          [innerHTML]="da.title | html"
+                          (click)="getTitleId(da.id)"
+                          [nz-tooltip]="da.title"
+                        ></a>
+                      </td>
+                      <td>{{ da.insert_time | date: 'YYYY-MM-dd' }}</td>
+                      <td>
+                        <div style="width: 100px">
+                          <nz-progress
+                            [nzPercent]="da.jobId"
+                            nzSize="small"
+                            nzStatus="active"
+                            [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }"
+                          >
+                          </nz-progress>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </nz-spin>
+            </div>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

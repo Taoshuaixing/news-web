@@ -1,0 +1,95 @@
+<nz-card>
+  <div nz-row nzGutter="16">
+    <div nz-col nzSpan="5">
+      <nz-tree *ngIf="nodes" nzBlockNode [nzData]="nodes" [nzTreeTemplate]="nzTreeTemplate" (nzClick)="onSelectTopic($event)"></nz-tree>
+      <ng-template #nzTreeTemplate let-node let-origin="origin">
+        <span class="custom-node">
+          <span *ngIf="node.title === '主题检索'">
+            <span class="folder-name-zhuti">{{ node.title }}</span>
+          </span>
+          <span *ngIf="node.title !== '主题检索'">
+            <span class="folder-name">{{ node.title }}</span>
+          </span>
+        </span>
+      </ng-template>
+    </div>
+    <div style="border-right: 1px solid #dddddd"></div>
+    <div nz-col nzSpan="18" style="margin-left: 10px">
+      <div nz-row [nzGutter]="[16, 24]">
+        <div nz-col nzSpan="17" class="content-num">
+          <span>1</span>
+          <a>中新网上海7月28日电</a>
+        </div>
+        <div nz-col nzSpan="5" class="content-time">
+          <span>2021-11-23</span>
+        </div>
+        <div nz-col nzSpan="1">
+          <i
+            style="font-size: 20px; cursor: pointer"
+            nz-icon
+            nzType="delete"
+            nzTheme="twotone"
+            [nzTwotoneColor]="'#eb2f96'"
+            (click)="deleteLike()"
+          ></i>
+        </div>
+        <!--  <div nz-col nzSpan="24" class="content-text">
+                    <span>《中共中央
+                        国务院关于支持浦东新区高水平改革开放打造社会主义现代化建设引领区的意见》(以下简称《意见》)中，首次以国家文件将浦东定位为“国际消费中心”，这标志着上海“五个中心”核心区之外又有了一个国家级新定位。浦东将如何打造“国际消费中心”，28日，浦东新区商务委员会主任辛雅琴向记者介绍了即将采取的一系列新举措。\n辛雅琴表示，浦东建设“国际消费中</span>
+                </div> -->
+      </div>
+      <nz-divider></nz-divider>
+
+      <div nz-row [nzGutter]="[16, 24]">
+        <div nz-col nzSpan="17" class="content-num">
+          <span>2</span>
+          <a>《西游记》作为四大名著之一</a>
+        </div>
+        <div nz-col nzSpan="5" class="content-time">
+          <span>2021-11-23</span>
+        </div>
+        <div nz-col nzSpan="1">
+          <i
+            style="font-size: 20px; cursor: pointer"
+            nz-icon
+            nzType="delete"
+            nzTheme="twotone"
+            [nzTwotoneColor]="'#eb2f96'"
+            (click)="deleteLike()"
+          ></i>
+        </div>
+        <!--                 <div nz-col nzSpan="24" class="content-text">
+                    <span>因故事情节有趣被翻拍多次，其中86版本最受欢迎。当年，86版《西游记》一经播出，收视率便高居不下，剧中的几位主演也随之火遍全国，比如饰演孙悟空的六小龄童，他的演艺事业就因《西游记》改变。
+                        六小龄童事业成功
+                        六小龄童出生于猴王世家，自小就跟着家中长辈学戏，积累一定经验后便上台演出。因为模仿猴子惟妙惟肖，六小龄童被《西游记》的导演杨洁看中，邀请他出演“孙悟空”一角，而六</span>
+                </div> -->
+      </div>
+      <nz-divider></nz-divider>
+      <div nz-row [nzGutter]="[16, 24]">
+        <div nz-col nzSpan="17" class="content-num">
+          <span>3</span>
+          <a>金庸先生创造出了一个畅快淋漓的武侠世界</a>
+        </div>
+        <div nz-col nzSpan="5" class="content-time">
+          <span>2021-11-23</span>
+        </div>
+        <div nz-col nzSpan="1">
+          <i
+            style="font-size: 20px; cursor: pointer"
+            nz-icon
+            nzType="delete"
+            nzTheme="twotone"
+            [nzTwotoneColor]="'#eb2f96'"
+            (click)="deleteLike()"
+          ></i>
+        </div>
+        <!--      <div nz-col nzSpan="24" class="content-text">
+                    <span>庸剧一经播出必然火爆荧屏，飞雪连天射白鹿，笑书神侠倚碧鸳，部部经典，一书一江湖，其中要数射雕三部曲最深入人心。《神雕侠侣》是射雕英雄传的续写，人物命运都有了新的走向。内地版的神雕侠侣，由黄晓明和刘亦菲主演，当时的刘亦菲因另一部金庸剧
+                        <天龙八部>里的神仙姐姐王语嫣而备受关注，自身那种冷艳的气质，很符合原著中小龙女不食人间烟火的形象，出演完小龙女后，更奠定了刘
+                    </span>
+                </div> -->
+      </div>
+      <nz-divider></nz-divider>
+    </div>
+  </div>
+</nz-card>

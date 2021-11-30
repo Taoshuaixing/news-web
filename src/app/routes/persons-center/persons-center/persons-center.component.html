@@ -1,0 +1,42 @@
+<nz-card class="persons-layout">
+  <div nz-row [nzGutter]="[16, 16]">
+    <div nz-col nzSpan="8">
+      <div nz-row [nzGutter]="[16, 16]">
+        <div nz-col nzSpan="24">
+          <nz-card style="border-radius: 10px" nzTitle="个人信息">
+            <div class="persons-center-card">
+              <nz-avatar [nzSize]="80" [nzSrc]="'http://192.168.0.140:5000/api/p/t/users/avatar/' + userProfile['avatarKey']"> </nz-avatar>
+              <div class="persons-center-admin">
+                <h1>admin</h1>
+                <span>超级管理员</span>
+              </div>
+            </div>
+            <nz-divider></nz-divider>
+            <div class="persons-center-message">
+              <span>上次登录时间：</span>
+              <span class="margin-text">2021-11-11</span><br />
+              <span>上次登录地点：</span>
+              <span class="margin-text">北京海淀</span>
+            </div>
+          </nz-card>
+        </div>
+        <div nz-col nzSpan="24">
+          <ul nz-menu nzMode="inline" style="border-radius: 10px">
+            <li nz-menu-item [routerLink]="menuObj.dataBase" nzMatchRouter nzSelected>
+              <i nz-icon [nzType]="'database'" [nzTheme]="'twotone'"></i><span>用户数据</span>
+            </li>
+            <li nz-menu-item [routerLink]="menuObj.setting" nzMatchRouter nzOpen>
+              <i nz-icon [nzType]="'setting'" [nzTheme]="'twotone'"></i><span>用户设置</span>
+            </li>
+            <li nz-menu-item [routerLink]="menuObj.collection" nzMatchRouter>
+              <i nz-icon [nzType]="'heart'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></i><span>用户收藏</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div nz-col nzSpan="16">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</nz-card>

@@ -1,0 +1,41 @@
+<nz-layout>
+  <div class="layout-top">
+    <div nz-row style="width: 1140px; margin: 0 auto">
+      <div nz-col nzSpan="12"><img src="assets/img/hbdxlogo.png" /></div>
+      <div nz-col nzSpan="12" class="layout-text">
+        <div>
+          <i nz-icon nzType="schedule" nzTheme="outline"></i>今天是{{ this.menuDate.getMonth() + 1 }}月{{ this.menuDate.getDate() }}日
+        </div>
+        <div class="user-header-message">
+          <img
+            nz-image
+            width="200px"
+            height="200px"
+            [nzSrc]="'http://192.168.0.140:5000/api/p/t/users/avatar/' + userProfile['avatarKey']"
+            alt=""
+          />
+          <nz-divider nzType="vertical"></nz-divider>
+          你好，{{ userProfile['realName'] }}
+          <nz-divider nzType="vertical"></nz-divider>
+          <span style="cursor: pointer" routerLink="/persons-center">个人中心 </span>
+          <nz-divider nzType="vertical"></nz-divider>
+          <span style="cursor: pointer" (click)="logout()">退出</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layout-menu">
+    <ul nz-menu nzMode="horizontal">
+      <li nz-menu-item nzMatchRouter *ngFor="let menu of menuList; index as i">
+        <a [routerLink]="menu.url" (click)="getMenuUrl(menu.url)">{{ menu.title }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div [ngClass]="{ 'layout-content': !this.menuFlag }">
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+  </div>
+  <nz-footer class="layout-top"> </nz-footer>
+</nz-layout>

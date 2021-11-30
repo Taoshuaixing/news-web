@@ -1,0 +1,48 @@
+<nz-card id="downLoadJspdf">
+  <div nz-row [nzGutter]="[16, 24]" nzJustify="space-around" nzAlign="middle">
+    <div nz-col nzSpan="24">
+      <div nz-row>
+        <div nz-col nzSpan="22">
+          <h2><b>本周情报综述</b></h2>
+        </div>
+        <div nz-col nzSpan="2">
+          <!-- <a (click)="pdfDownload()">PDF下载</a> -->
+          <a (click)="downLoadJspdf()">PDF下载</a>
+        </div>
+        <nz-divider></nz-divider>
+      </div>
+    </div>
+    <div nz-col nzSpan="12">
+      <nz-table #smallTable nzSize="small" [nzData]="listOfAllData" nzShowPagination="true">
+        <thead>
+          <tr>
+            <th>来源</th>
+            <th>数据量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let da of smallTable.data">
+            <td>{{ da.title }}</td>
+            <td>{{ da.num }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    <div nz-col nzSpan="12">
+      <h1 class="text-align-center">
+        <b>本周情报<br />综述</b>
+      </h1>
+    </div>
+  </div>
+</nz-card>
+<nz-card>
+  <div nz-row>
+    <div nz-col nzSpan="24">
+      <h2><b>本周情报走势</b></h2>
+      <nz-divider></nz-divider>
+    </div>
+    <div nz-col nzSpan="24">
+      <div echarts [options]="zxOption"></div>
+    </div>
+  </div>
+</nz-card>

@@ -1,0 +1,21 @@
+<nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+  <nz-card class="tree-view-card" nzTitle="主题分类">
+    <nz-tree nzShowLine nzShowIcon [nzExpandedIcon]="multiExpandedIconTpl" [nzData]="nodes" (nzClick)="nzEvent($event)"> </nz-tree>
+    <ng-template #multiExpandedIconTpl let-node let-origin="origin">
+      <i
+        [ngClass]="{ 'animate__animated animate__heartBeat': node.isExpanded }"
+        *ngIf="!origin.isLeaf"
+        nz-icon
+        nzTheme="twotone"
+        [nzType]="'file'"
+        class="ant-tree-switcher-line-icon"
+      ></i>
+    </ng-template>
+    <h3 *ngIf="ifSeeMore" style="text-align: center; padding-top: 20px">
+      <a (click)="seeMore()">查看更多 <i nz-icon nzType="down" nzTheme="outline"></i></a>
+    </h3>
+    <h3 *ngIf="!ifSeeMore" style="text-align: center; padding-top: 20px">
+      <a (click)="seeMore()">收起列表 <i nz-icon nzType="up" nzTheme="outline"></i></a>
+    </h3>
+  </nz-card>
+</nz-spin>

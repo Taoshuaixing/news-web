@@ -1,0 +1,233 @@
+<nz-spin [nzSpinning]="isSpinning && lastSpinning" nzTip="Loading...">
+  <div id="keshihua" class="animate__animated animate__fadeIn">
+    <div nz-row [nzGutter]="[16, 24]">
+      <div nz-col nzSpan="24">
+        <div nz-row [nzGutter]="[16, 24]">
+          <div nz-col nzSpan="8">
+            <h3><b>数据地图</b></h3>
+          </div>
+          <div nz-col nzSpan="16" class="text-align-right icon-font-size">
+            <nz-space>
+              <span *nzSpaceItem
+                ><a nz-tooltip="下载pdf" (click)="downLoadJspdf()"><i nz-icon nzType="file-pdf" nzTheme="outline"></i></a>
+              </span>
+              <span *nzSpaceItem
+                ><a nz-tooltip="保存图片" (click)="downloadImage('#dyTable', '地域数据')"
+                  ><i nz-icon nzType="vertical-align-bottom" nzTheme="outline"></i
+                ></a>
+              </span>
+              <span *nzSpaceItem
+                ><a nz-tooltip="切换详细列表" (click)="isVisible = !isVisible"><i nz-icon nzType="ordered-list" nzTheme="outline"></i></a>
+              </span>
+              <span *nzSpaceItem
+                ><a nz-tooltip="还原" (click)="rollback()"><i nz-icon nzType="rollback" nzTheme="outline"></i></a
+              ></span>
+            </nz-space>
+          </div>
+          <div nz-col nzSpan="24" id="dyTable">
+            <app-china-data-map [allData]="pieChartData"></app-china-data-map>
+          </div>
+        </div>
+      </div>
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="地域详情" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <nz-table *nzModalContent #nzTable [nzData]="pieChartData" [nzPageSize]="10">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>类别</th>
+              <th>文章数</th>
+              <th>占比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let da of nzTable.data; index as i">
+              <td>{{ i + 1 }}</td>
+              <td>{{ da.name }}</td>
+              <td>{{ da.value }}</td>
+              <td>{{ quZheng((da.value / sumCount) * 100) + '%' }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-modal>
+      <div nz-col nzSpan="12">
+        <div nz-row [nzGutter]="[16, 24]">
+          <div nz-col nzSpan="8">
+            <h3>
+              <b>{{ !showPieChart ? '数据柱状图' : '数据饼图' }}</b>
+            </h3>
+          </div>
+          <div nz-col nzSpan="16" class="text-align-right icon-font-size">
+            <nz-space>
+              <span *nzSpaceItem
+                ><a nz-tooltip="保存图片" (click)="downloadImage('#piechart', !showPieChart ? '数据柱状图' : '数据饼图')"
+                  ><i nz-icon nzType="vertical-align-bottom" nzTheme="outline"></i
+                ></a>
+              </span>
+              <span *nzSpaceItem
+                ><a nz-tooltip="切换详细列表" (click)="isVisible = !isVisible"><i nz-icon nzType="ordered-list" nzTheme="outline"></i></a>
+              </span>
+              <span *nzSpaceItem
+                ><a [nz-tooltip]="showPieChart ? '切换柱状图' : '切换饼图'" (click)="showPieChart = !showPieChart"
+                  ><i nz-icon [nzType]="showPieChart ? 'pie-chart' : 'bar-chart'" nzTheme="outline"></i
+                ></a>
+              </span>
+              <span *nzSpaceItem
+                ><a nz-tooltip="还原" (click)="rollback()"><i nz-icon nzType="rollback" nzTheme="outline"></i></a
+              ></span>
+            </nz-space>
+          </div>
+          <div nz-col nzSpan="24" id="piechart">
+            <app-pie-chart *ngIf="showPieChart" [pieData]="pieChartData"></app-pie-chart>
+            <app-bar-chart *ngIf="!showPieChart" [barChartData]="barChartData"></app-bar-chart>
+          </div>
+        </div>
+      </div>
+
+      <div nz-col nzSpan="12">
+        <div nz-row [nzGutter]="[16, 24]">
+          <div nz-col nzSpan="8">
+            <h3>
+              <b>{{ !showRadarChart ? '数据柱状图' : '数据雷达图' }}</b>
+            </h3>
+          </div>
+          <div nz-col nzSpan="16" class="text-align-right icon-font-size">
+            <nz-space>
+              <span *nzSpaceItem
+                ><a nz-tooltip="保存图片" (click)="downloadImage('#radarchart', !showPieChart ? '数据柱状图' : '数据雷达图')"
+                  ><i nz-icon nzType="vertical-align-bottom" nzTheme="outline"></i
+                ></a>
+              </span>
+              <span *nzSpaceItem
+                ><a nz-tooltip="切换详细列表" (click)="isVisible = !isVisible"><i nz-icon nzType="ordered-list" nzTheme="outline"></i></a>
+              </span>
+              <span *nzSpaceItem
+                ><a [nz-tooltip]="showRadarChart ? '切换柱状图' : '切换雷达图'" (click)="showRadarChart = !showRadarChart"
+                  ><i nz-icon [nzType]="showRadarChart ? 'radar-chart' : 'bar-chart'" nzTheme="outline"></i
+                ></a>
+              </span>
+              <span *nzSpaceItem
+                ><a nz-tooltip="还原" (click)="rollback()"><i nz-icon nzType="rollback" nzTheme="outline"></i></a
+              ></span>
+            </nz-space>
+          </div>
+          <div nz-col nzSpan="24" id="radarchart">
+            <app-radar-chart *ngIf="showRadarChart"></app-radar-chart>
+            <app-bar-chart *ngIf="!showRadarChart" [barChartData]="barChartData"></app-bar-chart>
+          </div>
+        </div>
+      </div>
+      <div nz-col nzSpan="12">
+        <div nz-row [nzGutter]="[16, 24]">
+          <div nz-col nzSpan="8">
+            <h3><b>媒体</b></h3>
+          </div>
+          <div nz-col nzSpan="16" class="text-align-right icon-font-size">
+            <nz-space>
+              <span *nzSpaceItem
+                ><a nz-tooltip="保存图片" (click)="downloadImage('#mtTable', '媒体数据')"
+                  ><i nz-icon nzType="vertical-align-bottom" nzTheme="outline"></i
+                ></a>
+              </span>
+              <span *nzSpaceItem
+                ><a nz-tooltip="切换详细列表" (click)="isVisibleMT = !isVisibleMT"
+                  ><i nz-icon nzType="ordered-list" nzTheme="outline"></i
+                ></a>
+              </span>
+              <span *nzSpaceItem
+                ><a nz-tooltip="还原" (click)="rollback()"><i nz-icon nzType="rollback" nzTheme="outline"></i></a
+              ></span>
+            </nz-space>
+          </div>
+          <div nz-col nzSpan="24" id="mtTable">
+            <nz-table #smallTables [nzData]="mtData" nzSize="small" nzShowPagination="true" [nzScroll]="{ y: '300px' }">
+              <thead>
+                <tr>
+                  <th>平台</th>
+                  <th></th>
+                  <th>文章数</th>
+                  <th>占比</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let da of smallTables.data">
+                  <td>{{ da.name }}</td>
+                  <td>
+                    <nz-progress
+                      [nzPercent]="quZheng((da.value / sumCount) * 100)"
+                      nzSize="small"
+                      [nzShowInfo]="false"
+                      nzStatus="active"
+                    ></nz-progress>
+                  </td>
+                  <td>{{ da.value }}</td>
+                  <td>{{ quZheng((da.value / sumCount) * 100) + '%' }}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+        </div>
+      </div>
+      <nz-modal [(nzVisible)]="isVisibleMT" nzTitle="媒体详情" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <nz-table *nzModalContent #nzTables [nzData]="mtData" [nzPageSize]="10" nzShowPagination="true">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>媒体</th>
+              <th>文章数</th>
+              <th>占比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let da of nzTables.data; index as i">
+              <td>{{ i + 1 }}</td>
+              <td>{{ da.name }}</td>
+              <td>{{ da.value }}</td>
+              <td>{{ quZheng((da.value / sumCount) * 100) + '%' }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-modal>
+      <div nz-col nzSpan="12">
+        <div nz-row [nzGutter]="[16, 24]">
+          <div nz-col nzSpan="8">
+            <h3>
+              <b>{{ !showLineChart ? '数据柱状图' : '数据折线图' }}</b>
+            </h3>
+          </div>
+          <div nz-col nzSpan="16" class="text-align-right icon-font-size">
+            <nz-space>
+              <span *nzSpaceItem
+                ><a nz-tooltip="保存图片" (click)="downloadImage('#lineChart', !showLineChart ? '数据柱状图' : '数据折线图')"
+                  ><i nz-icon nzType="vertical-align-bottom" nzTheme="outline"></i
+                ></a>
+              </span>
+              <span *nzSpaceItem
+                ><a nz-tooltip="切换详细列表" (click)="isVisibleMT = !isVisibleMT"
+                  ><i nz-icon nzType="ordered-list" nzTheme="outline"></i
+                ></a>
+              </span>
+              <span *nzSpaceItem
+                ><a [nz-tooltip]="showLineChart ? '切换柱状图' : '切换折线图'" (click)="showLineChart = !showLineChart"
+                  ><i nz-icon [nzType]="showLineChart ? 'area-chart' : 'bar-chart'" nzTheme="outline"></i
+                ></a>
+              </span>
+              <span *nzSpaceItem
+                ><a nz-tooltip="还原" (click)="rollback()"><i nz-icon nzType="rollback" nzTheme="outline"></i></a
+              ></span>
+            </nz-space>
+          </div>
+          <div nz-col nzSpan="24" id="lineChart">
+            <app-line-chart *ngIf="showLineChart" [lineChartData]="LineChartData"></app-line-chart>
+            <app-bar-chart *ngIf="!showLineChart" [barChartData]="LineChartData"></app-bar-chart>
+          </div>
+        </div>
+      </div>
+      <div nz-col nzSpan="24">
+        <app-ciyun></app-ciyun>
+      </div>
+      <div nz-col nzSpan="24">
+        <app-three-bar></app-three-bar>
+      </div>
+    </div>
+  </div>
+</nz-spin>

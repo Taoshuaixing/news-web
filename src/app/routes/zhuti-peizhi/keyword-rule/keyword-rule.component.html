@@ -1,0 +1,113 @@
+<nz-card>
+      <div nz-row  nzAlign="middle" nzJustify="center">
+        <div nz-col nzSpan="24">
+          <div nz-row [nzGutter]="[10, 18]" nzAlign="middle" nzJustify="center">
+            <h3 nz-col nzSpan="12">
+              <b>{{ topic['name'] + '配置搜索词' }}</b>
+            </h3>
+            <div nz-col nzSpan="12" class="text-align-right">
+<!--              <nz-space>-->
+<!--                <button  nz-button nzType="primary" (click)="clearAllRule()">清空</button>-->
+<!--                <button  nz-button nzType="primary" (click)="saveRule()">保存</button>-->
+<!--              </nz-space>-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div nz-row nzGutter="12" *ngFor="let rule of rules" style="margin-bottom: 10px;"  nzAlign="middle" nzJustify="center">
+    <div nz-col [nzMd]="16">
+      <nz-row nzGutter="8">
+        <div nz-col [nzMd]="24/rule.showLevel" >
+              <textarea class="test_box" contenteditable="true" *ngIf="rule.showLevel > 0"
+                        [(ngModel)]="rule.keyword1"
+                        nz-input rows="4" placeholder="请输入关键词，空格逗号分割"></textarea>
+        </div>
+        <div nz-col [nzMd]="24/rule.showLevel" >
+              <textarea *ngIf="rule.showLevel > 1"
+                        [(ngModel)]="rule.keyword2"
+                        nz-input rows="4" placeholder="请输入关键词，空格逗号分割"></textarea>
+        </div>
+        <div nz-col [nzMd]="24/rule.showLevel" >
+              <textarea *ngIf="rule.showLevel > 2"
+                        [(ngModel)]="rule.keyword3"
+                        nz-input rows="4" placeholder="请输入关键词，空格逗号分割"></textarea>
+        </div>
+      </nz-row>
+    </div>
+    <div nz-col class="icon-font-size" [nzMd]="1">
+      <i nz-icon
+         nzType="plus-circle"
+         nzTheme="twotone"
+         nz-tooltip
+         nzTooltipTitle="添加规则组"
+         (click)="addKeywordRule(rule)"
+      ></i>
+    </div>
+    <div nz-col [nzMd]="6">
+
+              <textarea [(ngModel)]="rule.notWord"
+                        nz-input rows="4" placeholder="请输入排除词"></textarea>
+
+    </div>
+    <div nz-col class="icon-font-size" [nzMd]="1">
+      <i
+        nz-icon
+        nzType="save"
+        nzTheme="twotone"
+        [nzTwotoneColor]="'#eb2f96'"
+        nz-tooltip
+        nzTooltipTitle="保存规则"
+        (click)="saveRule(rule)"
+      ></i>
+    </div>
+  </div>
+
+      <div nz-row nzGutter="12" *ngIf="newKeywordRule"  nzAlign="middle" nzJustify="center">
+        <div nz-col [nzMd]="16">
+          <nz-row nzGutter="8">
+            <div nz-col [nzMd]="24/newKeywordRule.showLevel" >
+              <textarea class="test_box" contenteditable="true" *ngIf="newKeywordRule.showLevel > 0"
+                        [(ngModel)]="newKeywordRule.keyword1"
+                        nz-input rows="4" placeholder="请输入关键词，空格逗号分割"></textarea>
+            </div>
+            <div nz-col [nzMd]="24/newKeywordRule.showLevel" >
+              <textarea *ngIf="newKeywordRule.showLevel > 1"
+                        [(ngModel)]="newKeywordRule.keyword2"
+                        nz-input rows="4" placeholder="请输入关键词，空格逗号分割"></textarea>
+            </div>
+            <div nz-col [nzMd]="24/newKeywordRule.showLevel" >
+              <textarea *ngIf="newKeywordRule.showLevel > 2"
+                        [(ngModel)]="newKeywordRule.keyword3"
+                        nz-input rows="4" placeholder="请输入关键词，空格逗号分割"></textarea>
+            </div>
+          </nz-row>
+        </div>
+        <div nz-col class="icon-font-size" [nzMd]="1">
+          <i nz-icon
+             nzType="plus-circle"
+             nzTheme="twotone"
+             nz-tooltip
+             nzTooltipTitle="添加规则组"
+             (click)="addKeywordRule(newKeywordRule)"
+          ></i>
+        </div>
+        <div nz-col [nzMd]="6">
+
+              <textarea [(ngModel)]="newKeywordRule.notWord"
+                        nz-input rows="4" placeholder="请输入排除词"></textarea>
+
+        </div>
+        <div nz-col class="icon-font-size" [nzMd]="1">
+          <i
+            nz-icon
+            nzType="save"
+            nzTheme="twotone"
+            [nzTwotoneColor]="'#eb2f96'"
+            nz-tooltip
+            nzTooltipTitle="保存规则"
+            (click)="saveRule(newKeywordRule)"
+          ></i>
+        </div>
+      </div>
+</nz-card>
+

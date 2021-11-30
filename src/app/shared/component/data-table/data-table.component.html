@@ -1,0 +1,90 @@
+<div *ngIf="browseText === '列表浏览'">
+  <div *ngFor="let da of data; index as i" class="data-table">
+    <nz-card [nzHoverable]="true" [nzBordered]="false" class="animate__animated animate__fadeIn">
+      <div nz-row>
+        <div nz-col nzSpan="19" class="content-num">
+          <label nz-checkbox [(ngModel)]="da.checked" class="content-lable">{{ i + 1 + pageSize * (pageIndex - 1) }}</label>
+          <a
+            *ngIf="da.title"
+            target="_blank"
+            [routerLink]="['/articleDetails']"
+            [queryParams]="{ id: da.id, keywords: this.keywords, pageName: pageName }"
+            [innerHTML]="da.title | html"
+          ></a>
+          <a
+            style="color: rgb(161, 161, 161)"
+            *ngIf="!da.title"
+            target="_blank"
+            [routerLink]="['/articleDetails']"
+            [queryParams]="{ id: da.id, keywords: this.keywords, pageName: pageName }"
+            >暂无标题</a
+          >
+          <span *ngIf="da.platform">
+            <nz-tag [nzColor]="randomColor(da.platform[0])">{{ da.platform[0] }}</nz-tag>
+          </span>
+          <i *ngIf="da['hotNum']" nz-icon nzType="fire" [nzTwotoneColor]="'#eb2f96'" nzTheme="twotone"></i>
+          <span style="margin-left: 5px" *ngIf="da['hotNum']">{{ da['hotNum'] | number }}</span>
+          <span>{{ da.region }}</span>
+        </div>
+        <div nz-col nzSpan="5" class="content-time">
+          <span *ngIf="pageName === 'statute'" [innerHTML]="da.publishTime | date: 'YYYY-MM-dd HH:mm:ss'"></span>
+          <span *ngIf="pageName === 'publicSentiment'" [innerHTML]="da.publish_time | date: 'YYYY-MM-dd HH:mm:ss'"></span>
+        </div>
+      </div>
+      <div class="content-text" *ngIf="abstractText === '显示摘要'">
+        <span *ngIf="da.content" [innerHTML]="da.content.substring(0, 200) | html"></span>
+        <span *ngIf="!da.content && pageName !== 'publicSentiment'">暂无内容</span>
+      </div>
+    </nz-card>
+  </div>
+</div>
+<div *ngIf="this.browseText === '分组浏览'">
+  <div *ngFor="let item of data">
+    <div nz-row [nzGutter]="16" nzAlign="middle">
+      <div nz-col nzSpan="21">
+        <nz-divider
+          *ngIf="item.viewName !== undefined"
+          [nzText]="item.viewName['name'] + ' (共有 ' + item.viewName['num'] + ' 篇文章)'"
+          nzOrientation="left"
+        >
+        </nz-divider>
+      </div>
+      <div nz-col nzSpan="3"><a class="dataTable-gengDuo" (click)="gengDuo(item.viewName['name'])">更多>>></a></div>
+      <div nz-col nzSpan="24">
+        <div *ngFor="let da of item.data; index as i" class="data-table">
+          <nz-card [nzHoverable]="true" [nzBordered]="false" class="animate__animated animate__fadeIn">
+            <div nz-row>
+              <div nz-col nzSpan="19" class="content-num">
+                <span>{{ i + 1 + pageSize * (pageIndex - 1) }}</span>
+                <a
+                  *ngIf="da.title"
+                  target="_blank"
+                  [routerLink]="['/articleDetails']"
+                  [queryParams]="{ id: da.id, keywords: this.keywords, pageName: pageName }"
+                  [innerHTML]="da.title | html"
+                ></a>
+                <a
+                  *ngIf="!da.title"
+                  target="_blank"
+                  [routerLink]="['/articleDetails']"
+                  [queryParams]="{ id: da.id, keywords: this.keywords, pageName: pageName }"
+                  >暂无标题</a
+                >
+                <span>{{ da.region }}</span>
+              </div>
+              <div nz-col nzSpan="5" class="content-time">
+                <span *ngIf="pageName === 'statute'" [innerHTML]="da.publishTime | html"></span>
+                <span *ngIf="pageName === 'publicSentiment'" [innerHTML]="da.publish_time | html"></span>
+              </div>
+            </div>
+            <div class="content-text" *ngIf="abstractText === '显示摘要'">
+              <span *ngIf="da.content" [innerHTML]="da.content.substring(0, 200) | html"></span>
+              <span *ngIf="!da.content">暂无内容</span>
+            </div>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<nz-empty *ngIf="this.data.length === 0"></nz-empty>

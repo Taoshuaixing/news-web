@@ -1,0 +1,49 @@
+<nz-card>
+  <div nz-row [nzGutter]="[16, 16]">
+    <div nz-col nzSpan="8">
+      <div class="persons-col" style="background-image: linear-gradient(135deg, #5efce8 10%, #736efe 100%)">
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+        <div style="margin-left: 40px">
+          <h1>2234</h1>
+          <span>用户访问量</span>
+        </div>
+      </div>
+    </div>
+    <div nz-col nzSpan="8">
+      <div class="persons-col" style="background-image: linear-gradient(135deg, #ffd3a5 10%, #fd6585 100%)">
+        <i nz-icon nzType="bell" nzTheme="outline"></i>
+        <div style="margin-left: 40px">
+          <h1>43</h1>
+          <span>系统通知量</span>
+        </div>
+      </div>
+    </div>
+    <div nz-col nzSpan="8">
+      <div class="persons-col" style="background-image: linear-gradient(135deg, #81ffef 10%, #f067b4 100%)">
+        <i nz-icon nzType="bug" nzTheme="outline"></i>
+        <div style="margin-left: 40px">
+          <h1>16</h1>
+          <span>bug数量</span>
+        </div>
+      </div>
+    </div>
+    <div nz-col nzSpan="24">
+      <nz-card style="border-radius: 10px" nzTitle="任务详情">
+        <div class="persons-progress">
+          <span>接口调试</span>
+          <nz-progress [nzPercent]="30.9" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }" nzStatus="active"> </nz-progress>
+          <span>组件</span>
+          <nz-progress [nzPercent]="69.9" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }" nzStatus="active"> </nz-progress>
+          <span>算法配置</span>
+          <nz-progress [nzPercent]="99.9" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }" nzStatus="active"> </nz-progress>
+        </div>
+      </nz-card>
+    </div>
+    <div nz-col nzSpan="12">
+      <div echarts [options]="lineOPtion"></div>
+    </div>
+    <div nz-col nzSpan="12">
+      <div echarts [options]="sanOPtion"></div>
+    </div>
+  </div>
+</nz-card>

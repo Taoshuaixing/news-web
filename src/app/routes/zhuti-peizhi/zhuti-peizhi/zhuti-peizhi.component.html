@@ -1,0 +1,16 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-09-15 15:58:19
+ * @LastEditTime: 2021-09-23 16:02:23
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \hebei-web\src\app\routes\zhuti-peizhi\zhuti-peizhi\zhuti-peizhi.component.html
+-->
+<div nz-row nzGutter="16">
+  <div nz-col nzSpan="6">
+    <k-topic (selectedTopic)="onSelected($event)"></k-topic>
+  </div>
+  <div nz-col nzSpan="18">
+    <k-keyword-rule [topic]="selectedTopic" *ngIf="selectedTopic"></k-keyword-rule>
+  </div>
+</div>

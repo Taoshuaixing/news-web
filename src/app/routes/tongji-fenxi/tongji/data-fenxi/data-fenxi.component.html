@@ -1,0 +1,27 @@
+<nz-card>
+  <div nz-row>
+    <div nz-col nzSpan="24">
+      <h2><b>数据分布</b></h2>
+      <nz-divider></nz-divider>
+    </div>
+    <div nz-col nzSpan="12">
+      <nz-table #smallTable nzSize="small" [nzData]="listOfAllData" nzShowPagination="false">
+        <thead>
+          <tr>
+            <th>来源</th>
+            <th>数据量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let da of smallTable.data">
+            <td>{{ da.datas.countName.f_city }}</td>
+            <td>{{ da.datas.countName.f_num }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    <div nz-col nzSpan="12">
+      <div echarts [options]="zxOption"></div>
+    </div>
+  </div>
+</nz-card>
