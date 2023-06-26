@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: '',
     component: DefaultComponent,
-    canActivate: [AuthGuardServiceGuard],
+    // canActivate: [AuthGuardServiceGuard],
     children: [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       { path: 'overview', loadChildren: () => import('./home-page/home-page.module').then((m) => m.HomePageModule) },
@@ -43,17 +43,17 @@ const routes: Routes = [
       { path: 'persons-center', loadChildren: () => import('./persons-center/persons-center.module').then((m) => m.PersonsCenterModule) },
     ],
   },
-  {
-    path: 'passport',
-    component: LayoutPassportComponent,
-    children: [{ path: 'login', component: UserLoginComponent, data: { title: '登录', titleI18n: 'pro-login' } }],
-  },
+  // {
+  //   path: 'passport',
+  //   component: LayoutPassportComponent,
+  //   children: [{ path: 'login', component: UserLoginComponent, data: { title: '登录', titleI18n: 'pro-login' } }],
+  // },
   // Blak Layout 空白布局
   /*   {
       path: 'data-v',
       component: LayoutBlankComponent,
       children: [{ path: '', loadChildren: () => import('./data-v/data-v.module').then((m) => m.DataVModule) }],
-    }, 
+    },
   // passport
   { path: '', loadChildren: () => import('./passport/passport.module').then((m) => m.PassportModule) },
   { path: 'exception', loadChildren: () => import('./exception/exception.module').then((m) => m.ExceptionModule) },

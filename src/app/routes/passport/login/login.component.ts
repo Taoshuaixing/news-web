@@ -11,7 +11,6 @@ import { NzTabChangeEvent } from 'ng-zorro-antd/tabs';
 import { CookieService } from 'ngx-cookie-service';
 import { Md5 } from 'ts-md5/dist/md5';
 
-
 @Component({
   selector: 'passport-login',
   templateUrl: './login.component.html',

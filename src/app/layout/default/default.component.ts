@@ -38,10 +38,10 @@ export class DefaultComponent implements OnInit, OnDestroy {
   ];
   menuFlag: boolean = false;
 
-  userProfile = JSON.parse(this.cookieService.get('profile'));
+  // userProfile = JSON.parse(this.cookieService.get('profile'));
   ngOnInit() {
-    this.userProfile = JSON.parse(this.cookieService.get('profile'));
-    console.log(this.userProfile);
+    // this.userProfile = JSON.parse(this.cookieService.get('profile'));
+    // console.log(this.userProfile);
     this.menuDate = new Date();
     if (location.href.split('#/')[1] === 'overview') {
       this.menuFlag = true;
@@ -66,7 +66,7 @@ export class DefaultComponent implements OnInit, OnDestroy {
   getAuthInfo() {
     this.authService.profile('api/auth/profile', environment.searchUrl).subscribe((res1) => {
       this.cookieService.set('profile', JSON.stringify(res1));
-      this.userProfile = JSON.parse(this.cookieService.get('profile'));
+      // this.userProfile = JSON.parse(this.cookieService.get('profile'));
       //this.router.navigate(['/']);
     });
   }
