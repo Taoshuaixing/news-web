@@ -23,7 +23,6 @@
                 <div></div>
                 <span>今日数据</span>
               </div>
-              <nz-divider></nz-divider>
               <div class="home-content-card-newSum">{{ newSum }}</div>
               <div
                 nz-row
@@ -139,12 +138,11 @@
                 <div></div>
                 <span>实时热点</span>
               </div>
-              <nz-divider></nz-divider>
               <nz-spin
                 [nzSpinning]="isSpinning"
                 nzTip="Loading..."
               >
-                <table style="color: white">
+                <table style="color: white;margin-top: 20px;">
                   <thead>
                     <tr style="font-size: 18px; color: #1890ff">
                       <th width="150">事件</th>

@@ -4,7 +4,7 @@
  * @Author: 陶帅星
  * @Date: 2022-03-15 18:23:34
  * @LastEditors: 陶帅星
- * @LastEditTime: 2023-07-05 15:47:05
+ * @LastEditTime: 2023-07-05 17:36:16
  */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { AuthService } from 'kkk-lib';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
 import { SubjectService } from 'src/app/routes/subject.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-default',
@@ -25,6 +26,7 @@ export class DefaultComponent implements OnInit, OnDestroy {
   searchKey: string | undefined;
   unSearch: Subscription;
   constructor(
+    private msg: NzMessageService,
     private subjectService: SubjectService,
     private router: Router,
     private cookieService: CookieService,
@@ -67,8 +69,9 @@ export class DefaultComponent implements OnInit, OnDestroy {
     }
   }
   logout() {
-    this.cookieService.deleteAll();
-    this.router.navigate(['/passport/login']);
+    this.msg.error('已隐藏登录功能！');
+    // this.cookieService.deleteAll();
+    // this.router.navigate(['/passport/login']);
   }
 
   getAuthInfo() {

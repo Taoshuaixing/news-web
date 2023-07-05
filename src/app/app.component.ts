@@ -4,7 +4,7 @@
  * @Author: 陶帅星
  * @Date: 2022-03-15 18:23:34
  * @LastEditors: 陶帅星
- * @LastEditTime: 2023-07-05 15:46:18
+ * @LastEditTime: 2023-07-05 17:31:59
  */
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
@@ -31,10 +31,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.events.pipe(filter((evt) => evt instanceof NavigationEnd)).subscribe(() => {
-      this.titleSrv.setTitle();
-      this.modalSrv.closeAll();
-    });
+    // this.router.events.pipe(filter((evt) => evt instanceof NavigationEnd)).subscribe(() => {
+    //   this.titleSrv.setTitle();
+    //   this.modalSrv.closeAll();
+    // });
     this.cookieService.set('profile', JSON.stringify({ realName: 'admin', avatarKey: '123', id: 1, groups: [], username: 'admin' }));
   }
 }
