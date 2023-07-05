@@ -32,5 +32,8 @@
   "ngschematics.schematics": [
     "ng-alain"
   ],
-  "workbench.editor.wrapTabs": true
+  "workbench.editor.wrapTabs": true,
+  "i18n-ally.localesPaths": [
+    "src/app/core/i18n"
+  ]
 }

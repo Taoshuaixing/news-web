@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
-import 'src/assets/js/china.js';
+import 'src/assets/map/china.js';
 
 @Component({
   selector: 'app-china-data-map',

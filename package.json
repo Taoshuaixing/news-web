@@ -2,16 +2,6 @@
   "name": "ng-alain",
   "version": "11.10.1",
   "description": "ng-zorro-antd admin panel front-end framework",
-  "author": "cipchk <cipchk@qq.com>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ng-alain/ng-alain.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ng-alain/ng-alain/issues"
-  },
-  "homepage": "https://ng-alain.com",
-  "license": "MIT",
   "keywords": [
     "delon",
     "antd",
@@ -32,14 +22,8 @@
     "lint:ts": "ng lint --fix",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less --fix",
     "pretty-quick": "pretty-quick",
-    "tslint-check": "tslint-config-prettier-check ./tslint.json",
-    "e2e": "ng e2e",
-    "test": "ng test --watch",
-    "test-coverage": "ng test --code-coverage --watch=false",
-    "color-less": "ng-alain-plugin-theme -t=colorLess",
-    "theme": "ng-alain-plugin-theme -t=themeCss",
-    "icon": "ng g ng-alain:plugin icon"
-  },
+    "tslint-check": "tslint-config-prettier-check ./tslint.json"
+    },
   "dependencies": {
     "@angular/animations": "~12.2.0",
     "@angular/common": "~12.2.0",

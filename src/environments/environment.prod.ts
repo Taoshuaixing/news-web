@@ -1,5 +1,12 @@
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: 陶帅星
+ * @Date: 2023-06-26 15:24:55
+ * @LastEditors: 陶帅星
+ * @LastEditTime: 2023-07-05 12:33:13
+ */
 import { DelonMockModule } from '@delon/mock';
-import { Environment } from '@delon/theme';
 import * as MOCKDATA from '../../_mock';
 
 export const environment = {

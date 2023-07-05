@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -24,9 +24,6 @@ export class CrudServiceService {
    */
   search(baseUrl: string, subUrl: string, params: any) {
     return this.http.post(baseUrl + subUrl, params);
-    // return new Promise((resole,reject)=>{
-    //   resole(this.http.post(baseUrl + subUrl, params))
-    // })
   }
 
   /**
@@ -37,10 +34,8 @@ export class CrudServiceService {
     return this.http.get(baseUrl + subUrl + id, { responseType: 'arraybuffer' });
   }
 
-  searchCrud(limit: number, page: number, s: string, subUrl:string) {
-    const headers = new HttpHeaders()
-      .set('ticket', this.cookieService.get('ticket'));
-    return this.http.get(environment.searchUrl
-      + '' + `${subUrl}?s=${s}&limit=${limit}&page=${page}`, {headers: headers});
+  searchCrud(limit: number, page: number, s: string, subUrl: string) {
+    const headers = new HttpHeaders().set('ticket', this.cookieService.get('ticket'));
+    return this.http.get(environment.searchUrl + '' + `${subUrl}?s=${s}&limit=${limit}&page=${page}`, { headers: headers });
   }
 }

@@ -1,8 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import * as echarts from 'echarts';
-import 'src/assets/js/china.js';
+import 'src/assets/map/china.js';
 import { CrudServiceService } from '../../crud-service.service';
 import { environment } from '@env/environment';
 

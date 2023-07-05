@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: 陶帅星
+ * @Date: 2023-06-26 15:24:55
+ * @LastEditors: 陶帅星
+ * @LastEditTime: 2023-07-05 12:35:21
+ */
 import { enableProdMode, ViewEncapsulation } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { preloaderFinished } from '@delon/theme';
