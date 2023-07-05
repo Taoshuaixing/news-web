@@ -37,7 +37,7 @@ export class StatuteComponent implements OnInit {
   sumCount: any;
   abstractText = '显示摘要';
   browseText = '列表浏览';
-  keShiHua: boolean = false;
+  keShiHua: boolean = true;
   subJectTreeNodes: any = [];
   selectMsg: boolean = false;
 
@@ -51,12 +51,12 @@ export class StatuteComponent implements OnInit {
   selectNode(e: any) {
     this.requestData.channel_class.push(e['key']);
     console.log(e['key']);
-    this.searchFindAll();
+    // this.searchFindAll();
   }
 
   ngOnInit(): void {
     this.requestData.startTime.setDate(this.requestData.startTime.getDate() - 3);
-    this.searchFindAll();
+    // this.searchFindAll();
   }
   /* 新闻检索数据 */
   searchFindAll() {

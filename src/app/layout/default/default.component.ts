@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: 陶帅星
+ * @Date: 2022-03-15 18:23:34
+ * @LastEditors: 陶帅星
+ * @LastEditTime: 2023-07-05 15:47:05
+ */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@env/environment';
@@ -39,10 +47,10 @@ export class DefaultComponent implements OnInit, OnDestroy {
   ];
   menuFlag: boolean = false;
 
-  // userProfile = JSON.parse(this.cookieService.get('profile'));
+  userProfile = JSON.parse(this.cookieService.get('profile'));
   ngOnInit() {
-    // this.userProfile = JSON.parse(this.cookieService.get('profile'));
-    // console.log(this.userProfile);
+    this.userProfile = JSON.parse(this.cookieService.get('profile'));
+    console.log(this.userProfile);
     this.menuDate = new Date();
     if (location.href.split('#/')[1] === 'overview') {
       this.menuFlag = true;
@@ -52,7 +60,6 @@ export class DefaultComponent implements OnInit, OnDestroy {
   }
   getMenuUrl(url: string) {
     console.log(url);
-    // this.menuFlag.url = url;
     if (url === '/overview') {
       this.menuFlag = true;
     } else {
@@ -67,8 +74,8 @@ export class DefaultComponent implements OnInit, OnDestroy {
   getAuthInfo() {
     this.authService.profile('api/auth/profile', environment.searchUrl).subscribe((res1) => {
       this.cookieService.set('profile', JSON.stringify(res1));
-      // this.userProfile = JSON.parse(this.cookieService.get('profile'));
-      //this.router.navigate(['/']);
+      this.userProfile = JSON.parse(this.cookieService.get('profile'));
+      this.router.navigate(['/']);
     });
   }
 

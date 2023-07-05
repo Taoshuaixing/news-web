@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: 陶帅星
+ * @Date: 2022-03-15 18:23:34
+ * @LastEditors: 陶帅星
+ * @LastEditTime: 2023-07-05 16:45:30
+ */
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { CrudService } from 'kkk-lib';
 import { CookieService } from 'ngx-cookie-service';
@@ -35,9 +43,9 @@ export class UserCollectionComponent implements OnInit {
   ngOnInit() {
     this.userProfile = JSON.parse(this.cookieService.get('profile'));
     if (this.userProfile['groups']) {
-      this.groupId = this.userProfile['groups'][0]['id'];
+      // this.groupId = this.userProfile['groups'][0]['id'];
       console.log(this.groupId);
-      this.initData();
+      // this.initData();
     }
   }
   initData() {

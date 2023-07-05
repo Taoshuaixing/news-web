@@ -18,7 +18,7 @@ export class DataFenxiComponent implements OnInit {
   constructor(private crudService: CrudServiceService) {}
 
   async ngOnInit() {
-    await this.getData();
+    // await this.getData();
   }
   async getData() {
     this.listOfAllData = [];

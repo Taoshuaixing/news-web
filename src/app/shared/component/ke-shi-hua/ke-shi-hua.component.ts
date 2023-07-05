@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: 陶帅星
+ * @Date: 2022-03-15 18:23:34
+ * @LastEditors: 陶帅星
+ * @LastEditTime: 2023-07-05 16:37:39
+ */
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { environment } from '@env/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -28,41 +36,40 @@ export class KeShiHuaComponent implements OnInit {
   constructor(private componentService: ComponentService, private message: NzMessageService, private crudService: CrudServiceService) {}
 
   ngOnInit() {
-    this.isSpinning = true;
-    this.lastSpinning = true;
-    this.crudService
-      .search(environment.searchUrl, 'api/search/searchTopicBySolr', { groupType: 'channel_class', indexName: 'newsIndex' })
-      .subscribe(
-        (res: any) => {
-          res.data.forEach((item: any) => {
-            this.isSpinning = false;
-            this.pieChartData.push({ value: item.num, name: item.title });
-            this.barChartData.name.push(item.title);
-            this.barChartData.value.push(item.num);
-          });
-        },
-        (error) => {
-          console.log(error);
-          this.isSpinning = false;
-        },
-      );
-
-    this.crudService
-      .search(environment.searchUrl, 'api/search/searchTopicBySolr', { groupType: 'jobclass', indexName: 'newsIndex' })
-      .subscribe(
-        (res: any) => {
-          res.data.forEach((item: any) => {
-            this.lastSpinning = false;
-            this.mtData.push({ name: item.title.replace(/\[/g, '').replace(/\]/g, ''), value: item.num });
-            this.LineChartData.name.push(item.title.replace(/\[/g, '').replace(/\]/g, ''));
-            this.LineChartData.value.push(item.num);
-          });
-        },
-        (error) => {
-          console.log(error);
-          this.lastSpinning = false;
-        },
-      );
+    // this.isSpinning = true;
+    // this.lastSpinning = true;
+    // this.crudService
+    //   .search(environment.searchUrl, 'api/search/searchTopicBySolr', { groupType: 'channel_class', indexName: 'newsIndex' })
+    //   .subscribe(
+    //     (res: any) => {
+    //       res.data.forEach((item: any) => {
+    //         this.isSpinning = false;
+    //         this.pieChartData.push({ value: item.num, name: item.title });
+    //         this.barChartData.name.push(item.title);
+    //         this.barChartData.value.push(item.num);
+    //       });
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //       this.isSpinning = false;
+    //     },
+    //   );
+    // this.crudService
+    //   .search(environment.searchUrl, 'api/search/searchTopicBySolr', { groupType: 'jobclass', indexName: 'newsIndex' })
+    //   .subscribe(
+    //     (res: any) => {
+    //       res.data.forEach((item: any) => {
+    //         this.lastSpinning = false;
+    //         this.mtData.push({ name: item.title.replace(/\[/g, '').replace(/\]/g, ''), value: item.num });
+    //         this.LineChartData.name.push(item.title.replace(/\[/g, '').replace(/\]/g, ''));
+    //         this.LineChartData.value.push(item.num);
+    //       });
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //       this.lastSpinning = false;
+    //     },
+    //   );
   }
   //保存png图片
   downloadImage(id: any, name: any) {

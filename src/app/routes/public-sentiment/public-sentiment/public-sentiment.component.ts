@@ -33,12 +33,12 @@ export class PublicSentimentComponent implements OnInit {
 
   ngOnInit(): void {
     this.requestData.startTime.setDate(this.requestData.startTime.getDate() - 3);
-    this.searchPublicSentimentData();
+    // this.searchPublicSentimentData();
   }
 
   selectNode(e: any) {
     this.requestData.platform.push(e.key);
-    this.searchPublicSentimentData();
+    // this.searchPublicSentimentData();
   }
 
   /* 查询舆情榜单数据 */

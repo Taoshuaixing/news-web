@@ -1,10 +1,14 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import * as echarts from 'echarts';
 import 'src/assets/map/china.js';
 import { CrudServiceService } from '../../crud-service.service';
 import { environment } from '@env/environment';
-
+interface DataItem {
+  id: number;
+  name: string;
+  // 其他属性...
+}
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -15,7 +19,7 @@ export class HomePageComponent implements OnInit {
   ZMOptions: any;
   MTOptions: any;
   isSpinning = false;
-  data: any;
+  data: any = [];
   colors = ['#5470C6', '#91CC75', '#EE6666'];
   ROOT_PATH = 'https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples';
   requestData: any = {
@@ -160,7 +164,7 @@ export class HomePageComponent implements OnInit {
       },
     ],
   };
-  constructor(private datePipe: DatePipe, private el: ElementRef, private crudService: CrudServiceService) {}
+  constructor(private crudService: CrudServiceService) {}
 
   ngOnInit() {
     this.pageName = location.href.split('/#/')[1];
@@ -171,10 +175,8 @@ export class HomePageComponent implements OnInit {
       this.newSum++;
     }, 500);
     this.initChart();
-    // this.searchFindAll();
     this.searchPublicSentimentData();
     this.initEcharts();
-    console.log(this.random(1, 100));
   }
   initEcharts() {
     // 新建一个promise对象
@@ -203,47 +205,29 @@ export class HomePageComponent implements OnInit {
   }
   showMarquee() {
     this.flag = true;
-    setTimeout(() => {
-      this.data.push(this.data);
-      this.data.shift();
-      this.flag = false;
-    }, 500);
+    const temp = this.data[0];
+    this.data.shift();
+    this.data.push(temp);
+    this.flag = false;
   }
 
   ngOnDestroy() {
     this.timer = null;
   }
 
-  /* 新闻数据 */
-  /*   searchFindAll() {
-      this.isSpinning = true;
-      this.crudService.search(environment.searchUrl, 'api/search/searchNewsBySolr', this.requestData).subscribe(
-        (result: any) => {
-          this.isSpinning = false;
-          this.data = result.data;
-          this.data.forEach((d: any) => {
-            d.jobId = this.random(1, 101);
-          });
-          console.log(this.data);
-        },
-        (error) => {
-          this.isSpinning = false;
-          console.log(error);
-        },
-      );
-    } */
-
   /* 舆情榜单数据 */
   searchPublicSentimentData() {
     this.isSpinning = true;
-    this.crudService.search(environment.searchUrl, 'api/hbdx-top/searchTopBySolr', this.requestData).subscribe(
-      (result: any) => {
+    this.crudService.searchAll('https://apis.tianapi.com/areanews/index?key=21510d1cfa8ec1778bc9dc2a39d088c5&areaname=北京').subscribe(
+      (res: any) => {
         this.isSpinning = false;
-        this.data = result.data;
+        this.data.push(...res.result.list);
+        this.data.push(...res.result.list);
+        this.data.push(...res.result.list);
+
         this.data.forEach((d: any) => {
           d.jobId = this.random(1, 101);
         });
-        console.log(this.data);
       },
       (error) => {
         this.isSpinning = false;
@@ -251,7 +235,6 @@ export class HomePageComponent implements OnInit {
       },
     );
   }
-
   initChart() {
     this.ZFOptions = {
       xAxis: {
@@ -308,7 +291,7 @@ export class HomePageComponent implements OnInit {
         },
       },
       legend: {
-        data: ['境内', '境外', '其他'],
+        data: ['境内', '境外'],
         textStyle: { color: '#fff' },
       },
       xAxis: [
@@ -328,7 +311,7 @@ export class HomePageComponent implements OnInit {
       yAxis: [
         {
           type: 'value',
-          name: '境内',
+          name: '境内数据',
           min: 0,
           max: 250,
           position: 'right',
@@ -339,12 +322,12 @@ export class HomePageComponent implements OnInit {
             },
           },
           axisLabel: {
-            formatter: '{value} ml',
+            formatter: '{value}',
           },
         },
         {
           type: 'value',
-          name: '境外',
+          name: '境外数据',
           min: 0,
           max: 250,
           position: 'right',
@@ -356,7 +339,7 @@ export class HomePageComponent implements OnInit {
             },
           },
           axisLabel: {
-            formatter: '{value} ml',
+            formatter: '{value}',
           },
         },
         {
@@ -372,7 +355,7 @@ export class HomePageComponent implements OnInit {
             },
           },
           axisLabel: {
-            formatter: '{value} °C',
+            formatter: '{value}',
           },
         },
       ],
@@ -407,12 +390,11 @@ export class HomePageComponent implements OnInit {
       radar: {
         // shape: 'circle',
         indicator: [
-          { name: '销售（Sales）', max: 6500 },
-          { name: '管理（Administration）', max: 16000 },
-          { name: '信息技术（Information Technology）', max: 30000 },
-          { name: '客服（Customer Support）', max: 38000 },
-          { name: '研发（Development）', max: 52000 },
-          { name: '市场（Marketing）', max: 25000 },
+          { name: '华中', max: 6500 },
+          { name: '华北', max: 16000 },
+          { name: '华南', max: 30000 },
+          { name: '华西', max: 38000 },
+          { name: '华东', max: 52000 },
         ],
       },
       series: [

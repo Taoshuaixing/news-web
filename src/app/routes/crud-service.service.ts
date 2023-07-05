@@ -12,8 +12,8 @@ export class CrudServiceService {
    查询
    */
 
-  searchAll(baseUrl: string, subUrl: string) {
-    return this.http.get('' + baseUrl + '/' + subUrl);
+  searchAll(baseUrl: string) {
+    return this.http.get(baseUrl);
   }
 
   /**

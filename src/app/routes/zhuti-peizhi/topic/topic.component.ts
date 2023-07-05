@@ -37,9 +37,9 @@ export class TopicComponent implements OnInit {
   ngOnInit() {
     this.userProfile = JSON.parse(this.cookieService.get('profile'));
     if (this.userProfile['groups']) {
-      this.groupId = this.userProfile['groups'][0]['id'];
+      // this.groupId = this.userProfile['groups'][0]['id'];
       console.log(this.groupId);
-      this.initData();
+      // this.initData();
     }
     // const a = {"$and":[{"groupId":1},{"parent":{"$isnull":true}}]}
   }
