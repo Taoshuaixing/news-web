@@ -35,6 +35,7 @@ export class DefaultComponent implements OnInit, OnDestroy {
     { title: '统计分析', url: '/tongji' },
     { title: '主题配置', url: '/zhuti' },
     { title: '系统权限配置', url: '/users' },
+    { title: '个人中心', url: '/persons-center' },
   ];
   menuFlag: boolean = false;
 
