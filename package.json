@@ -1,6 +1,6 @@
 {
   "name": "ng-alain",
-  "version": "11.10.1",
+  "version": "0.1.1",
   "description": "ng-zorro-antd admin panel front-end framework",
   "keywords": [
     "delon",
@@ -22,7 +22,8 @@
     "lint:ts": "ng lint --fix",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less --fix",
     "pretty-quick": "pretty-quick",
-    "tslint-check": "tslint-config-prettier-check ./tslint.json"
+    "tslint-check": "tslint-config-prettier-check ./tslint.json",
+    "deploy": "sh script/deploy.sh"
     },
   "dependencies": {
     "@angular/animations": "~12.2.0",
