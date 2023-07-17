@@ -15,7 +15,7 @@
     "ng": "ng",
     "start": "ng s --proxy-config proxy.conf.js -o",
     "hmr": "ng s -o --hmr",
-    "build": "npm run ng-high-memory build -- --configuration production",
+    "build": "npm run ng-high-memory build -- --configuration production --base-href /news-web/",
     "analyze": "npm run ng-high-memory build -- --configuration production --source-map",
     "analyze:view": "source-map-explorer dist/**/*.js",
     "lint": "npm run lint:ts && npm run lint:style",

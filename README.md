@@ -18,11 +18,10 @@ npm start           # 启动项目完成后，浏览器导航至：http://localh
 > [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin)、
 > [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
 
-## 链接
+## 项目预览
 
-- [Demo](https://zengqinglei.github.io/creekdream-admin-ngzorro/)
-- [Angular Document](https://www.angular.cn/guide/quickstart)
-- [NG-ZORRO Document](https://ng.ant.design/docs/introduce/zh)
+- [在线访问](https://taoshuaixing.github.io/news-web/)
+- [国内访问](http://taoshuaixing.gitee.io/news-web)
 
 ## 环境准备
 
