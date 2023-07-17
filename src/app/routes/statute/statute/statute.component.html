@@ -1,10 +1,28 @@
-<div nz-row nzJustify="space-between" nzAlign="top" [nzGutter]="[16, 24]" class="layout-content-width">
-  <div nz-col nzSpan="6">
-    <app-subject-tree (clickNode)="selectNode($event)" [nodes]="subJectTreeNodes"> </app-subject-tree>
+<div
+  nz-row
+  nzJustify="space-between"
+  nzAlign="top"
+  [nzGutter]="[16, 24]"
+  class="layout-content-width"
+>
+  <div
+    nz-col
+    nzSpan="6"
+  >
+    <app-subject-tree
+      (clickNode)="selectNode($event)"
+      [nodes]="subJectTreeNodes"
+    > </app-subject-tree>
   </div>
-  <div nz-col nzSpan="18">
+  <div
+    nz-col
+    nzSpan="18"
+  >
     <div nz-row>
-      <div nz-col nzSpan="24">
+      <div
+        nz-col
+        nzSpan="24"
+      >
         <app-search-criteria
           #searchCriteriaComponent
           (keyWordsArray)="getChildKeyWords($event)"
@@ -19,9 +37,15 @@
         >
         </app-search-criteria>
       </div>
-      <div nz-col nzSpan="24">
+      <div
+        nz-col
+        nzSpan="24"
+      >
         <nz-card [ngClass]="{ 'animate__animated animate__shakeX': this.sumCount === 0 }">
-          <nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+          <nz-spin
+            [nzSpinning]="isSpinning"
+            nzTip="Loading..."
+          >
             <div id="news-data">
               <app-data-table
                 [data]="data"
@@ -37,7 +61,10 @@
               >
               </app-data-table>
             </div>
-            <app-ke-shi-hua [sumCount]="sumCount" *ngIf="keShiHua"> </app-ke-shi-hua>
+            <app-ke-shi-hua
+              [sumCount]="sumCount"
+              *ngIf="keShiHua"
+            > </app-ke-shi-hua>
           </nz-spin>
           <div *ngIf="!keShiHua">
             <nz-affix [nzOffsetBottom]="0">
@@ -65,26 +92,78 @@
     [nzPopconfirmTitle]="PopconfirmTitle"
     (nzOnConfirm)="confirm()"
     (nzOnCancel)="cancel()"
-    src="../../../../assets/img/setting.png"
+    src="assets/img/setting.png"
     alt="setting"
   />
 </div>
 <ng-template #PopconfirmTitle>
-  <div nz-row [nzGutter]="[16, 24]" class="popconfirm-content" nzJustify="space-around" nzAlign="middle">
-    <div nz-col nzSpan="24">
-      <button nz-button nzType="primary" (click)="selectAll()">{{ selectMsg ? '取消全选' : '全选' }}</button>
+  <div
+    nz-row
+    [nzGutter]="[16, 24]"
+    class="popconfirm-content"
+    nzJustify="space-around"
+    nzAlign="middle"
+  >
+    <div
+      nz-col
+      nzSpan="24"
+    >
+      <button
+        nz-button
+        nzType="primary"
+        (click)="selectAll()"
+      >{{ selectMsg ? '取消全选' : '全选' }}</button>
     </div>
-    <div nz-col nzSpan="12">
-      <i nz-icon nzType="file-excel" nzTheme="twotone" nz-tooltip nzTooltipTitle="export-excel" (click)="exportExcel()"></i>
+    <div
+      nz-col
+      nzSpan="12"
+    >
+      <i
+        nz-icon
+        nzType="file-excel"
+        nzTheme="twotone"
+        nz-tooltip
+        nzTooltipTitle="export-excel"
+        (click)="exportExcel()"
+      ></i>
     </div>
-    <div nz-col nzSpan="12">
-      <i nz-icon nzType="file-pdf" nzTheme="twotone" nz-tooltip nzTooltipTitle="export-pdf" (click)="exportPDF()"></i>
+    <div
+      nz-col
+      nzSpan="12"
+    >
+      <i
+        nz-icon
+        nzType="file-pdf"
+        nzTheme="twotone"
+        nz-tooltip
+        nzTooltipTitle="export-pdf"
+        (click)="exportPDF()"
+      ></i>
     </div>
-    <div nz-col nzSpan="12">
-      <i nz-icon nzType="file-word" nzTheme="twotone" nz-tooltip nzTooltipTitle="export-word"></i>
+    <div
+      nz-col
+      nzSpan="12"
+    >
+      <i
+        nz-icon
+        nzType="file-word"
+        nzTheme="twotone"
+        nz-tooltip
+        nzTooltipTitle="export-word"
+      ></i>
     </div>
-    <div nz-col nzSpan="12">
-      <i nz-icon nzType="file-image" nzTheme="twotone" nz-tooltip nzTooltipTitle="export-image" (click)="downloadPNG()"></i>
+    <div
+      nz-col
+      nzSpan="12"
+    >
+      <i
+        nz-icon
+        nzType="file-image"
+        nzTheme="twotone"
+        nz-tooltip
+        nzTooltipTitle="export-image"
+        (click)="downloadPNG()"
+      ></i>
     </div>
   </div>
 </ng-template>
